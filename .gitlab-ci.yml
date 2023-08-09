@@ -23,8 +23,6 @@ web_server:
   image: python:3
   stage: deploy
   script:
-    - ls -la
-    - cd public
     - python3 -m http.server 80
   dependencies:
     - pages
