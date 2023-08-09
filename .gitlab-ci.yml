@@ -17,3 +17,29 @@ pages:
       - public
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+
+variables:
+  WEB_SERVER_CONF: |
+    server {
+      listen 80 default_server;
+      server_name localhost;
+
+      location / {
+        root /builds/$CI_PROJECT_PATH/public;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+      }
+    }
+
+web_server:
+  image: nginx:alpine
+  stage: deploy
+  script:
+    - echo "$WEB_SERVER_CONF" > default.conf
+    - mv default.conf /etc/nginx/conf.d/default.conf
+    - nginx -g "daemon off;"
+  artifacts:
+    paths:
+      - public
+
