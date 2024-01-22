@@ -1,9 +1,19 @@
+image: node:18.16.0
 pages:
   stage: deploy
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: npm
+    paths:
+      - node_modules/
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
+    - npm install
+    - npm run build --repository=$CI_PROJECT_NAME
+    - cp -a dist/. public/
   artifacts:
     paths:
       - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

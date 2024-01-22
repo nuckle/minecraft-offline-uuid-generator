@@ -1,0 +1,86 @@
+// USER VARIABLES SECTION
+
+$accent: #3b8526; // Accent Color
+$codgray: #171615; // Cod Gray Color
+$fontsize: 16; // Body Font Size
+$textcolor: #333; // Text Color
+$lineheight: 1.65; // Document Line Height
+$userfont: minecraft-font, sans-serif; // User Font Family
+$systemfont: -apple-system, blinkmacsystemfont, arial, sans-serif; // System Font Family
+
+// Bootstrap compatible gutter variable => $gutter
+$grid-gutter-width: 30px;
+$gutter: $grid-gutter-width;
+
+// IMPORT SECTION
+
+// FONTS LOAD SECTION
+
+@mixin font-face($font-family, $url, $weight, $style) {
+	@font-face {
+		src: url($url) format('woff2');
+		font-family: '#{$font-family}';
+		font-weight: #{$weight};
+		font-style: $style;
+		font-display: swap;
+	}
+}
+
+@function toRem($pxval, $base: 16) {
+	@if not unitless($pxval) {
+		$pxval: strip-units($pxval);
+	}
+
+	@if not unitless($base) {
+		$base: strip-units($base);
+	}
+
+	@return calc(($pxval / $base) * 1rem);
+}
+
+
+@include font-face(
+	'minecraft-font',
+	'/fonts/MinecraftRegular.woff2',
+	400,
+	normal
+);
+@include font-face(
+	'minecraft-font',
+	'/fonts/MinecraftBold.woff2',
+	700,
+	normal
+);
+// GENERAL CSS SETTINGS
+
+::placeholder {
+	color: #666;
+}
+
+::selection {
+	color: #fff;
+	background-color: $accent;
+}
+
+input,
+textarea {
+	outline: none;
+
+	&:required:valid {
+		border-color: green;
+	}
+
+	&:focus:required:invalid {
+		border-color: red;
+	}
+}
+
+body {
+	position: relative;
+	overflow-x: hidden;
+	min-width: 320px;
+	font-family: $userfont;
+	font-size: toRem($fontsize);
+	line-height: $lineheight;
+	color: $textcolor;
+}

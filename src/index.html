@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+{{> head }}
+
+<body>
+	{{> header }}
+
+	<form class="form" action="/">
+		<div class="container">
+			<label class="form__label" for="input">Nicknames</label>
+			<textarea class="form__input" id="input" name="input" placeholder="Notch 
+jeb_" spellcheck="false"></textarea>
+
+			<div class="form__option-wrapper">
+				<div class="form__option">
+					<input type="radio" class="form__radio" id="text" name="export" value="txt" required="" checked="">
+					<label for="text">Plain Text</label>
+				</div>
+
+				<div class="form__option">
+					<input type="radio" class="form__radio" id="json" name="export" value="json" required="">
+					<label for="json">JSON</label>
+				</div>
+			</div>
+
+			<button class="form__button" type="button">Generate</button>
+			<div>
+				<label class="form__label" for="result">Result</label>
+			</div>
+			<div class="form__result-wrapper">
+				<textarea class="form__result" name="result" id="result" rows="10"
+					placeholder="Generated UUIDs will appear here" spellcheck="false"></textarea>
+				<button aria-label="Copy to clipbaord generated UUIDs" type="button" class="form-btn form-btn--copy">
+					<svg class="form-btn__icon form-btn__icon--copy">
+						<use xlink:href="/img/sprite.svg#clipboard"></use>
+					</svg>
+				</button>
+				<button aria-label="Download generated UUIDs" type="button" class="form-btn form-btn--download">
+					<svg class="form-btn__icon form-btn__icon--download">
+						<use xlink:href="/img/sprite.svg#download"></use>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</form>
+
+	{{> footer }}
+</body>
+
+</html>
