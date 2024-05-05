@@ -6,13 +6,64 @@
 	list-style-type: none;
 }
 
-body {
-	background-color: gainsboro;
+.color-mode-btn {
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	display: block;
+	cursor: pointer;
+	color: #fff;
 
-	@media (prefers-color-scheme: dark) {
-		background-color: #363636;
-		color: #fff;
+	&__icon {
+		max-width: 100%;
+		max-height: 100%;
 	}
+
+	&:hover,
+	&:focus-visible,
+	&:active {
+		color: #E7CE00;
+	}
+}
+
+/* Any element with the class "light--hidden" will be hidden when the site is set to Light Mode */
+:root[color-mode='light'] .light--hidden {
+	display: none;
+}
+
+/* Any element with the class "dark--hidden" will be hidden when the site is set to Dark Mode */
+:root[color-mode='dark'] .dark--hidden {
+	display: none;
+}
+
+:root[color-mode='dark'] {
+	--color-page-background: #363636;
+	--color-text: #fff;
+	--color-input-background: #3b3b3b;
+	--color-input-text: #fff;
+	--color-input-border: #494949;
+	--color-label: #fff;
+	--color-icon: #fff;
+	--color-social: #fff;
+}
+
+:root[color-mode='light'] {
+	--color-page-background: #dcdcdc;
+	--color-text: #000;
+	--color-input-background: #fff;
+	--color-input-text: #000;
+	--color-input-border: #000;
+	--color-label: #333;
+	--color-icon: config.$accent;
+	--color-social: config.$codgray;
+}
+
+body {
+	background-color: var(--color-page-background);
+	color: var(--color-text);
 }
 
 .header {
@@ -54,16 +105,12 @@ body {
 
 	&__result,
 	&__input {
-		border: 1px solid config.$codgray;
+		border: 1px solid var(--color-input-border);
 		border-radius: 0;
 		padding: 8px 25px 8px 8px;
 		box-sizing: border-box;
-
-		@media (prefers-color-scheme: dark) {
-			background-color: #3b3b3b;
-			color: #fff;
-			border-color: #494949;
-		}
+		background-color: var(--color-input-background);
+		color: var(--color-input-text);
 	}
 
 	&__input {
@@ -84,11 +131,7 @@ body {
 	&__label {
 		margin-bottom: 5px;
 		display: block;
-		color: #333;
-
-		@media (prefers-color-scheme: dark) {
-			color: #fff;
-		}
+		color: var(--color-label);
 	}
 
 	&__result-wrapper {
@@ -156,6 +199,7 @@ body {
 		width: 100%;
 		height: 100%;
 		transition: 0.25s ease color;
+		color: var(--color-icon);
 
 		&:hover,
 		&:focus-visible,
@@ -163,9 +207,6 @@ body {
 			color: config.$accent;
 		}
 
-		@media (prefers-color-scheme: dark) {
-			color: #fff;
-		}
 	}
 
 	&--copy {
@@ -194,10 +235,7 @@ body {
 		height: 42px;
 		transition: 0.25s ease color;
 		color: config.$codgray;
-
-		@media (prefers-color-scheme: dark) {
-			color: #fff;
-		}
+		color: var(--color-social);
 	}
 
 	&__social svg {
@@ -206,6 +244,7 @@ body {
 	}
 
 	&__social {
+
 		&:hover,
 		&:focus-visible,
 		&:active {
