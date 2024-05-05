@@ -16,6 +16,7 @@
 	display: block;
 	cursor: pointer;
 	color: #fff;
+	transition: color 0.25s ease;
 
 	&__icon {
 		max-width: 100%;
@@ -25,7 +26,7 @@
 	&:hover,
 	&:focus-visible,
 	&:active {
-		color: #E7CE00;
+		color: #e7ce00;
 	}
 }
 
@@ -96,7 +97,28 @@ body {
 	}
 
 	&__radio {
+		width: 14px;
+		height: 14px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background-color: #f5f5f700;
+		border-radius: 11%;
+		-webkit-border-radius: 11%;
+		border: 1.3px solid #111;
+		display: inline-block;
+		margin-top: 0;
+		transition:
+			background-color 0.3s 0s ease,
+			border 0.3s 0s ease,
+			box-shadow 0.3s 0s ease;
 		margin-right: 8px;
+
+		&:checked {
+			background-color: #f5f5f700;
+			border: 1.3px solid #0f6ddc88;
+			box-shadow: inset 0px 0px 0px 3px config.$accent;
+		}
 	}
 
 	&__option-wrapper {
@@ -168,7 +190,21 @@ body {
 }
 
 .form__uploader {
-	display: none;
+	// display: none;
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+
+	&:hover,
+	&:focus-visible,
+	&:active {
+		& + .form__uploader-label .form-btn__icon {
+			color: config.$accent;
+		}
+	}
 
 	&-label {
 		position: absolute;
@@ -194,6 +230,14 @@ body {
 	border: none;
 	background: none;
 
+	&:hover,
+	&:focus-visible,
+	&:active {
+		.form-btn__icon {
+			color: config.$accent;
+		}
+	}
+
 	&__icon {
 		display: inline-block;
 		width: 100%;
@@ -206,7 +250,6 @@ body {
 		&:active {
 			color: config.$accent;
 		}
-
 	}
 
 	&--copy {
@@ -244,11 +287,22 @@ body {
 	}
 
 	&__social {
+		&--gitlab {
 
-		&:hover,
-		&:focus-visible,
-		&:active {
-			color: config.$accent;
+			&:hover,
+			&:focus-visible,
+			&:active {
+				color: #fa6e27;
+			}
+		}
+
+		&--github {
+
+			&:hover,
+			&:focus-visible,
+			&:active {
+				color: #2c424f;
+			}
 		}
 	}
 

@@ -60,13 +60,14 @@ body {
   display: block;
   cursor: pointer;
   color: #fff;
+  transition: color 0.25s ease;
 }
 .color-mode-btn__icon {
   max-width: 100%;
   max-height: 100%;
 }
 .color-mode-btn:hover, .color-mode-btn:focus-visible, .color-mode-btn:active {
-  color: #E7CE00;
+  color: #e7ce00;
 }
 
 /* Any element with the class "light--hidden" will be hidden when the site is set to Light Mode */
@@ -131,7 +132,24 @@ body {
   margin-left: 15px;
 }
 .form__radio {
+  width: 14px;
+  height: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: rgba(245, 245, 247, 0);
+  border-radius: 11%;
+  -webkit-border-radius: 11%;
+  border: 1.3px solid #111;
+  display: inline-block;
+  margin-top: 0;
+  transition: background-color 0.3s 0s ease, border 0.3s 0s ease, box-shadow 0.3s 0s ease;
   margin-right: 8px;
+}
+.form__radio:checked {
+  background-color: rgba(245, 245, 247, 0);
+  border: 1.3px solid rgba(15, 109, 220, 0.5333333333);
+  box-shadow: inset 0px 0px 0px 3px #3b8526;
 }
 .form__option-wrapper {
   margin-bottom: 15px;
@@ -189,7 +207,15 @@ body {
 }
 
 .form__uploader {
-  display: none;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.form__uploader:hover + .form__uploader-label .form-btn__icon, .form__uploader:focus-visible + .form__uploader-label .form-btn__icon, .form__uploader:active + .form__uploader-label .form-btn__icon {
+  color: #3b8526;
 }
 .form__uploader-label {
   position: absolute;
@@ -213,6 +239,9 @@ body {
   border-radius: 0;
   border: none;
   background: none;
+}
+.form-btn:hover .form-btn__icon, .form-btn:focus-visible .form-btn__icon, .form-btn:active .form-btn__icon {
+  color: #3b8526;
 }
 .form-btn__icon {
   display: inline-block;
@@ -253,8 +282,11 @@ body {
   max-width: 100%;
   max-height: 100%;
 }
-.footer__social:hover, .footer__social:focus-visible, .footer__social:active {
-  color: #3b8526;
+.footer__social--gitlab:hover, .footer__social--gitlab:focus-visible, .footer__social--gitlab:active {
+  color: #fa6e27;
+}
+.footer__social--github:hover, .footer__social--github:focus-visible, .footer__social--github:active {
+  color: #2c424f;
 }
 .footer__social:not(:first-of-type) {
   margin-left: 10px;
@@ -311,6 +343,11 @@ body {
 @media (min-width: 1400px) {
   .container {
     max-width: 1320px;
+  }
+}
+@media (min-width: 2560px) {
+  .container {
+    max-width: 1920px;
   }
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
