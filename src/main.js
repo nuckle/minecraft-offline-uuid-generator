@@ -1,6 +1,7 @@
 import createUUID from './js/uuid.js';
+import { registerSW } from 'virtual:pwa-register';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 	const button = document.querySelector('.form__button');
 	const input = document.querySelector('.form__input');
 	const result = document.querySelector('.form__result');
@@ -8,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const copyButton = document.querySelector('.form-btn--copy');
 	const copyButtonIcon = document.querySelector('.form-btn__icon--copy use');
 	const downloadButton = document.querySelector('.form-btn__icon--download');
+	const uploadButton = document.querySelector('.form__uploader');
 
 	function getOptionValue() {
 		return document.querySelector('input[name="export"]:checked').value;
@@ -31,10 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		format = (generatedPairs.length && format === 'json') == 0 ? 'text' : 'json';
 
-		result.value =
-			format === 'json'
-				? JSON.stringify(generatedPairs)
-				: generatedPairs.join('\n');
+		result.value = format === 'json' ? JSON.stringify(generatedPairs, null, 2) : generatedPairs.join('\n');
 	}
 
 	button.addEventListener('click', () => {
@@ -89,4 +88,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
+	uploadButton.addEventListener('change', async (e) => {
+		let file = e.target.files[0];
+		let text = await file.text();
+		console.log(text);
+
+		input.value += input.textContent || text;
+	});
+
+	registerSW({
+		immediate: true,
+	});
 });

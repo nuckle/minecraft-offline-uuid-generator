@@ -41,6 +41,7 @@ export default defineConfig({
 				'/img/sprite.svg',
 			],
 			registerType: 'autoUpdate',
+			selfDestroying: true,
 			devOptions: {
 				enabled: true,
 			},
@@ -127,16 +128,14 @@ export default defineConfig({
 			// 	example: resolve(root, 'example', 'index.html')
 			// },
 			input: Object.fromEntries(
-				glob
-					.sync(['./src/*.html', './src/**/*.html', '!./src/parts/**'])
-					.map((file) => [
-						// This remove `src/` as well as the file extension from each
-						// file, so e.g. src/nested/foo.html becomes nested/foo
-						relative(__dirname, file.slice(0, file.length - extname(file).length)),
-						// This expands the relative paths to absolute paths, so e.g.
-						// src/nested/foo becomes /project/src/nested/fo.js
-						fileURLToPath(new URL(file, import.meta.url)),
-					]),
+				glob.sync(['./src/*.html', './src/**/*.html', '!./src/parts/**']).map((file) => [
+					// This remove `src/` as well as the file extension from each
+					// file, so e.g. src/nested/foo.html becomes nested/foo
+					relative(__dirname, file.slice(0, file.length - extname(file).length)),
+					// This expands the relative paths to absolute paths, so e.g.
+					// src/nested/foo becomes /project/src/nested/fo.js
+					fileURLToPath(new URL(file, import.meta.url)),
+				]),
 			),
 			output: {
 				chunkFileNames: 'js/[name]-[hash].js',

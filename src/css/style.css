@@ -98,7 +98,7 @@ body {
 }
 @media (prefers-color-scheme: dark) {
   .form__result, .form__input {
-    background-color: #3B3B3B;
+    background-color: #3b3b3b;
     color: #fff;
     border-color: #494949;
   }
@@ -107,11 +107,14 @@ body {
   display: block;
   width: 100%;
   resize: vertical;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  cursor: auto;
+  min-height: 50px;
 }
 .form__result {
   width: 100%;
   resize: vertical;
+  min-height: 75px;
 }
 .form__label {
   margin-bottom: 5px;
@@ -145,6 +148,26 @@ body {
   border-color: #fff;
 }
 
+.form-wrapper {
+  position: relative;
+}
+
+.form__uploader {
+  display: none;
+}
+.form__uploader-label {
+  position: absolute;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: none;
+  right: 9px;
+  top: 10px;
+}
+
 .form-btn {
   position: absolute;
   cursor: pointer;
@@ -170,11 +193,11 @@ body {
   }
 }
 .form-btn--copy {
-  right: 6px;
+  right: 9px;
   top: 5px;
 }
 .form-btn--download {
-  right: 5px;
+  right: 9px;
   top: 40px;
 }
 

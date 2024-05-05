@@ -4,12 +4,28 @@
 
 <body>
 	{{> header }}
-
 	<form class="form" action="/">
 		<div class="container">
 			<label class="form__label" for="input">Nicknames</label>
-			<textarea class="form__input" id="input" name="input" placeholder="Notch 
-jeb_" spellcheck="false"></textarea>
+			<div class="form-wrapper">
+				<textarea class="form__input" id="input" name="input" placeholder="Notch 
+jeb_" spellcheck="false" rows="3"></textarea>
+
+
+				<label title="Upload list of nicknames" for="form__uploader" class="form__uploader-label">
+					<svg class="form-btn__icon form-btn__icon--upload">
+						<use xlink:href="/img/sprite.svg#upload"></use>
+					</svg>
+				</label>
+				<input type='file' accept="*.txt" aria-label="Upload list of nicknames" class="form__uploader"
+					id="form__uploader">
+
+			</div>
+
+			<button class="form__button" type="button">Generate</button>
+			<div>
+				<label class="form__label" for="result">Result</label>
+			</div>
 
 			<div class="form__option-wrapper">
 				<div class="form__option">
@@ -23,19 +39,17 @@ jeb_" spellcheck="false"></textarea>
 				</div>
 			</div>
 
-			<button class="form__button" type="button">Generate</button>
-			<div>
-				<label class="form__label" for="result">Result</label>
-			</div>
 			<div class="form__result-wrapper">
 				<textarea class="form__result" name="result" id="result" rows="10"
 					placeholder="Generated UUIDs will appear here" spellcheck="false"></textarea>
-				<button aria-label="Copy to clipbaord generated UUIDs" type="button" class="form-btn form-btn--copy">
+				<button title="Copy generated UUIDs to clipboard" aria-label="Copy to clipbaord generated UUIDs"
+					type="button" class="form-btn form-btn--copy">
 					<svg class="form-btn__icon form-btn__icon--copy">
 						<use xlink:href="/img/sprite.svg#clipboard"></use>
 					</svg>
 				</button>
-				<button aria-label="Download generated UUIDs" type="button" class="form-btn form-btn--download">
+				<button title="Download generated UUIDs" aria-label="Download generated UUIDs" type="button"
+					class="form-btn form-btn--download">
 					<svg class="form-btn__icon form-btn__icon--download">
 						<use xlink:href="/img/sprite.svg#download"></use>
 					</svg>

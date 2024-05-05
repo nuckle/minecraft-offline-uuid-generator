@@ -1,11 +1,7 @@
 {
+	"printWidth": 140,
 	"tabWidth": 1,
 	"useTabs": true,
 	"singleQuote": true,
-	"semi": true,
-	"printWidth": 80,
-	"proseWrap": "always",
-	"arrayBracketSpacing": false,
-	"plugins": ["@prettier/plugin-php"]
+	"semi": true
 }
-
