@@ -157,7 +157,7 @@ body {
 .form__result, .form__input {
   border: 1px solid var(--color-input-border);
   border-radius: 0;
-  padding: 8px 25px 8px 8px;
+  padding: 8px 30px 8px 8px;
   box-sizing: border-box;
   background-color: var(--color-input-background);
   color: var(--color-input-text);
@@ -169,6 +169,9 @@ body {
   margin-bottom: 15px;
   cursor: auto;
   min-height: 50px;
+}
+.form__input--highlight {
+  border-color: #3b8526;
 }
 .form__result {
   width: 100%;
@@ -226,7 +229,7 @@ body {
   border-radius: 0;
   border: none;
   background: none;
-  right: 9px;
+  right: 13px;
   top: 10px;
 }
 
@@ -254,11 +257,11 @@ body {
   color: #3b8526;
 }
 .form-btn--copy {
-  right: 9px;
+  right: 13px;
   top: 5px;
 }
 .form-btn--download {
-  right: 9px;
+  right: 13px;
   top: 40px;
 }
 
