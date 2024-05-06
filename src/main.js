@@ -1,4 +1,6 @@
 import createUUID from './js/uuid.js';
+import { copyTextFromInput, downloadFile, handleTextFiles } from './js/utils.js';
+import { toggleColorMode } from './js/theme.js';
 import { registerSW } from 'virtual:pwa-register';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -47,26 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     copyButton.addEventListener('click', () => {
-        if (result.value !== '') {
-            navigator.clipboard.writeText(result.value);
-            copyButtonIcon.setAttribute('href', './img/sprite.svg#check');
-            setTimeout(() => {
-                copyButtonIcon.removeAttribute('href', './img/sprite.svg#check');
-            }, 350);
-        }
+        copyTextFromInput(result, copyButtonIcon);
     });
-
-    function download(filename, data) {
-        const blob = new Blob([data], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
-
-        URL.revokeObjectURL(url);
-    }
 
     downloadButton.addEventListener('click', () => {
         if (result.value !== '') {
@@ -86,14 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 '-' +
                 ('0' + now.getSeconds()).slice(-2) +
                 '.';
-            download(fileName + getOptionValue(), result.value);
+            downloadFile(fileName + getOptionValue(), result.value);
         }
     });
-
-    async function handleTextFiles(files) {
-        const promises = [...files].map(updateInputFromFile);
-        await Promise.all(promises);
-    }
 
     async function updateInputFromFile(file) {
         let text = await file.text();
@@ -102,15 +81,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     uploadButton.addEventListener('change', async (e) => {
         let files = e.target.files;
-        await handleTextFiles(files);
+        await handleTextFiles(files, updateInputFromFile);
         await generatePairs(getOptionValue());
     });
 
-    ['dragenter', 'dragover'].forEach((eventName) => {
-        input.addEventListener(eventName, highlight, false);
+    ['dragenter', 'dragover'].forEach((e) => {
+        input.addEventListener(e, highlight, false);
     });
-    ['dragleave', 'drop'].forEach((eventName) => {
-        input.addEventListener(eventName, unhighlight, false);
+    ['dragleave', 'drop'].forEach((e) => {
+        input.addEventListener(e, unhighlight, false);
     });
 
     input.addEventListener('drop', handleDrop, false);
@@ -120,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let dt = e.dataTransfer;
         let files = dt.files;
 
-        await handleTextFiles(files);
+        await handleTextFiles(files, updateInputFromFile);
         await generatePairs(getOptionValue());
     }
 
@@ -131,25 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function unhighlight(e) {
         input.classList.remove('form__input--highlight');
     }
-
-    const toggleColorMode = (e) => {
-        // Switch to Light Mode
-        if (e.currentTarget.classList.contains('light--hidden')) {
-            // Sets the custom HTML attribute
-            document.documentElement.setAttribute('color-mode', 'light');
-
-            //Sets the user's preference in local storage
-            localStorage.setItem('color-mode', 'light');
-            return;
-        }
-
-        /* Switch to Dark Mode
-        Sets the custom HTML attribute */
-        document.documentElement.setAttribute('color-mode', 'dark');
-
-        // Sets the user's preference in local storage
-        localStorage.setItem('color-mode', 'dark');
-    };
 
     // Get the buttons in the DOM
     const toggleColorButtons = document.querySelectorAll('.color-mode-btn');
