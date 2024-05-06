@@ -9,7 +9,7 @@ pages:
     paths:
       - node_modules/
   script:
-    - npm install
+    - npm install --omit=dev
     - npm run build --repository=$CI_PROJECT_NAME
     - cp -a dist/. public/
   artifacts:
