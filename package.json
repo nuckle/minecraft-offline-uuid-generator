@@ -14,7 +14,7 @@
 		"prettify": "glob-run js-beautify --editorconfig -r 'dist/**/*.html'",
 		"preview": "vite preview --port 3001 --host"
 	},
-	"license": "ISC",
+	"license": "GPL-3.0",
 	"devDependencies": {
 		"@types/node": "^20.12.8",
 		"autoprefixer": "^10.4.14",
