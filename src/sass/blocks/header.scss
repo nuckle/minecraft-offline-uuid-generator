@@ -1,0 +1,20 @@
+@use '../base/config';
+
+.header {
+	background-color: config.$codgray;
+	margin-bottom: 35px;
+
+	&__title {
+		color: #fff;
+		margin: 0 auto;
+		font-size: 1.5em;
+		justify-self: center;
+		text-align: center;
+	}
+
+	&__logo {
+		color: #fff;
+		height: 30px;
+		width: 30px;
+	}
+}

@@ -1,0 +1,191 @@
+@use '../base/config';
+
+.form {
+	&__option {
+		display: inline-flex;
+		align-items: center;
+
+		&:not(:first-of-type) {
+			margin-left: 15px;
+		}
+	}
+
+	&__radio {
+		width: 14px;
+		height: 14px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background-color: #f5f5f700;
+		border-radius: 11%;
+		-webkit-border-radius: 11%;
+		border: 1.3px solid #111;
+		display: inline-block;
+		margin-top: 0;
+		transition:
+			background-color 0.3s 0s ease,
+			border 0.3s 0s ease,
+			box-shadow 0.3s 0s ease;
+		margin-right: 8px;
+
+		&:checked {
+			background-color: #f5f5f700;
+			border: 1.3px solid #0f6ddc88;
+			box-shadow: inset 0px 0px 0px 3px config.$accent;
+		}
+	}
+
+	&__option-wrapper {
+		margin-bottom: 15px;
+	}
+
+	&__result,
+	&__input {
+		border: 1px solid var(--color-input-border);
+		border-radius: 0;
+		padding: 8px 34px 8px 8px;
+		box-sizing: border-box;
+		background-color: var(--color-input-background);
+		color: var(--color-input-text);
+	}
+
+	&__input {
+		display: block;
+		width: 100%;
+		resize: vertical;
+		margin-bottom: 15px;
+		cursor: auto;
+		min-height: 70px;
+
+		&--highlight {
+			border-color: config.$accent;
+		}
+	}
+
+	&__result {
+		width: 100%;
+		resize: vertical;
+		min-height: 75px;
+	}
+
+	&__label {
+		margin-bottom: 5px;
+		display: block;
+		color: var(--color-label);
+	}
+
+	&__result-wrapper {
+		position: relative;
+	}
+
+	&__button {
+		display: block;
+		margin: 0 auto 10px;
+		text-transform: uppercase;
+		padding: 8px 16px;
+		background-color: config.$accent;
+		cursor: pointer;
+		border: 1px solid config.$accent;
+		color: #fff;
+		font-weight: bold;
+		font-size: 0.8em;
+		line-height: 1em;
+		transition:
+			0.25s ease background-color,
+			0.25s ease border-color;
+
+		&:hover,
+		&:focus-visible,
+		&:active {
+			background-color: config.$codgray;
+			border-color: #fff;
+		}
+	}
+}
+
+.form-wrapper {
+	position: relative;
+}
+
+.form__uploader {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+
+	&:hover,
+	&:focus-visible,
+	&:active {
+		& + .form__uploader-label .form-btn__icon {
+			color: config.$accent;
+		}
+	}
+
+	&-label {
+		position: absolute;
+		cursor: pointer;
+		width: 24px;
+		height: 24px;
+		padding: 0;
+		border-radius: 0;
+		border: none;
+		background: none;
+		right: 15px;
+		top: 10px;
+	}
+}
+
+.form-btn {
+	position: absolute;
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border-radius: 0;
+	border: none;
+	background: none;
+
+	&:hover,
+	&:focus-visible,
+	&:active {
+		.form-btn__icon {
+			color: config.$accent;
+		}
+	}
+
+	&__icon {
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+		transition: 0.25s ease color;
+		color: var(--color-icon);
+
+		&:hover,
+		&:focus-visible,
+		&:active {
+			color: config.$accent;
+		}
+	}
+
+	&--hidden {
+		display: none;
+	}
+
+	&--clear {
+		top: 44px;
+		right: 15px;
+	}
+
+	&--copy {
+		right: 15px;
+		top: 5px;
+	}
+
+	&--download {
+		right: 15px;
+		top: 44px;
+	}
+}
+
