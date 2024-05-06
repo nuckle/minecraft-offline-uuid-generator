@@ -11,6 +11,16 @@
 	}
 }
 
+@media (max-width: 576px) {
+	.header {
+
+		&__title {
+			font-size: 1em;
+		}
+	}
+
+}
+
 @media (min-width: 576px) {
 	.container {
 		max-width: 540px;

@@ -120,8 +120,9 @@ body {
 }
 .header__logo {
   color: #fff;
-  height: 30px;
   width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 .form__option {
@@ -314,6 +315,11 @@ body {
   padding-bottom: 15px;
 }
 
+@media (max-width: 576px) {
+  .header__title {
+    font-size: 1em;
+  }
+}
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
