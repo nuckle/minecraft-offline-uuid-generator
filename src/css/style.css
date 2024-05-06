@@ -157,7 +157,7 @@ body {
 .form__result, .form__input {
   border: 1px solid var(--color-input-border);
   border-radius: 0;
-  padding: 8px 30px 8px 8px;
+  padding: 8px 34px 8px 8px;
   box-sizing: border-box;
   background-color: var(--color-input-background);
   color: var(--color-input-text);
@@ -168,7 +168,7 @@ body {
   resize: vertical;
   margin-bottom: 15px;
   cursor: auto;
-  min-height: 50px;
+  min-height: 70px;
 }
 .form__input--highlight {
   border-color: #3b8526;
@@ -229,7 +229,7 @@ body {
   border-radius: 0;
   border: none;
   background: none;
-  right: 13px;
+  right: 15px;
   top: 10px;
 }
 
@@ -256,13 +256,20 @@ body {
 .form-btn__icon:hover, .form-btn__icon:focus-visible, .form-btn__icon:active {
   color: #3b8526;
 }
+.form-btn--hidden {
+  display: none;
+}
+.form-btn--clear {
+  top: 44px;
+  right: 15px;
+}
 .form-btn--copy {
-  right: 13px;
+  right: 15px;
   top: 5px;
 }
 .form-btn--download {
-  right: 13px;
-  top: 40px;
+  right: 15px;
+  top: 44px;
 }
 
 .footer {

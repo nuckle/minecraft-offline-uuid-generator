@@ -24,3 +24,11 @@ export async function handleTextFiles(files, fileCallback) {
     const promises = [...files].map(fileCallback);
     await Promise.all(promises);
 }
+
+export async function handleDrop(e, dropCallback) {
+    e.preventDefault();
+    let dt = e.dataTransfer;
+    let files = dt.files;
+
+    dropCallback(files)
+}

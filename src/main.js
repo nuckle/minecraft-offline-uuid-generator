@@ -1,5 +1,5 @@
 import createUUID from './js/uuid.js';
-import { copyTextFromInput, downloadFile, handleTextFiles } from './js/utils.js';
+import { copyTextFromInput, downloadFile, handleTextFiles, handleDrop } from './js/utils.js';
 import { toggleColorMode } from './js/theme.js';
 import { registerSW } from 'virtual:pwa-register';
 
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const copyButtonIcon = document.querySelector('.form-btn__icon--copy use');
     const downloadButton = document.querySelector('.form-btn__icon--download');
     const uploadButton = document.querySelector('.form__uploader');
+    const clearButton = document.querySelector('.form-btn--clear');
 
     function getOptionValue() {
         return document.querySelector('input[name="export"]:checked').value;
@@ -92,16 +93,39 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener(e, unhighlight, false);
     });
 
-    input.addEventListener('drop', handleDrop, false);
+    input.addEventListener(
+        'drop',
+        (e) => {
+            handleDrop(e, async (files) => {
+                await handleTextFiles(files, updateInputFromFile);
+                await generatePairs(getOptionValue());
+            });
+        },
+        false,
+    );
 
-    async function handleDrop(e) {
-        e.preventDefault();
-        let dt = e.dataTransfer;
-        let files = dt.files;
-
-        await handleTextFiles(files, updateInputFromFile);
-        await generatePairs(getOptionValue());
+    function hideClearBtn() {
+        clearButton.classList.add('form-btn--hidden');
     }
+
+    function showClearBtn() {
+        clearButton.classList.remove('form-btn--hidden');
+    }
+
+    clearButton.addEventListener('click', function () {
+        input.value = '';
+        hideClearBtn();
+    });
+
+
+	input.addEventListener('input', async function() {
+		if (input.value === '') {
+			hideClearBtn();
+		} else if (input.value !== '') {
+			showClearBtn();
+		}
+	});
+
 
     function highlight(e) {
         input.classList.add('form__input--highlight');

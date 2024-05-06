@@ -129,7 +129,7 @@ body {
 	&__input {
 		border: 1px solid var(--color-input-border);
 		border-radius: 0;
-		padding: 8px 30px 8px 8px;
+		padding: 8px 34px 8px 8px;
 		box-sizing: border-box;
 		background-color: var(--color-input-background);
 		color: var(--color-input-text);
@@ -141,7 +141,7 @@ body {
 		resize: vertical;
 		margin-bottom: 15px;
 		cursor: auto;
-		min-height: 50px;
+		min-height: 70px;
 
 		&--highlight {
 			border-color: config.$accent;
@@ -218,7 +218,7 @@ body {
 		border-radius: 0;
 		border: none;
 		background: none;
-		right: 13px;
+		right: 15px;
 		top: 10px;
 	}
 }
@@ -255,14 +255,23 @@ body {
 		}
 	}
 
+	&--hidden {
+		display: none;
+	}
+
+	&--clear {
+		top: 44px;
+		right: 15px;
+	}
+
 	&--copy {
-		right: 13px;
+		right: 15px;
 		top: 5px;
 	}
 
 	&--download {
-		right: 13px;
-		top: 40px;
+		right: 15px;
+		top: 44px;
 	}
 }
 
