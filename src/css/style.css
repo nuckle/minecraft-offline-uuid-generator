@@ -1,3 +1,189 @@
+:root[color-mode=light] {
+  /*
+
+  Atom One Light by Daniel Gamage
+  Original One Light Syntax theme from https://github.com/atom/one-light-syntax
+
+  base:    #fafafa
+  mono-1:  #383a42
+  mono-2:  #686b77
+  mono-3:  #a0a1a7
+  hue-1:   #0184bb
+  hue-2:   #4078f2
+  hue-3:   #a626a4
+  hue-4:   #50a14f
+  hue-5:   #e45649
+  hue-5-2: #c91243
+  hue-6:   #986801
+  hue-6-2: #c18401
+
+  */
+}
+:root[color-mode=light] pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+:root[color-mode=light] code.hljs {
+  padding: 3px 5px;
+}
+:root[color-mode=light] .hljs {
+  color: #383a42;
+  background: #fafafa;
+}
+:root[color-mode=light] .hljs-comment,
+:root[color-mode=light] .hljs-quote {
+  color: #a0a1a7;
+  font-style: italic;
+}
+:root[color-mode=light] .hljs-doctag,
+:root[color-mode=light] .hljs-keyword,
+:root[color-mode=light] .hljs-formula {
+  color: #a626a4;
+}
+:root[color-mode=light] .hljs-section,
+:root[color-mode=light] .hljs-name,
+:root[color-mode=light] .hljs-selector-tag,
+:root[color-mode=light] .hljs-deletion,
+:root[color-mode=light] .hljs-subst {
+  color: #e45649;
+}
+:root[color-mode=light] .hljs-literal {
+  color: #0184bb;
+}
+:root[color-mode=light] .hljs-string,
+:root[color-mode=light] .hljs-regexp,
+:root[color-mode=light] .hljs-addition,
+:root[color-mode=light] .hljs-attribute,
+:root[color-mode=light] .hljs-meta .hljs-string {
+  color: #50a14f;
+}
+:root[color-mode=light] .hljs-attr,
+:root[color-mode=light] .hljs-variable,
+:root[color-mode=light] .hljs-template-variable,
+:root[color-mode=light] .hljs-type,
+:root[color-mode=light] .hljs-selector-class,
+:root[color-mode=light] .hljs-selector-attr,
+:root[color-mode=light] .hljs-selector-pseudo,
+:root[color-mode=light] .hljs-number {
+  color: #986801;
+}
+:root[color-mode=light] .hljs-symbol,
+:root[color-mode=light] .hljs-bullet,
+:root[color-mode=light] .hljs-link,
+:root[color-mode=light] .hljs-meta,
+:root[color-mode=light] .hljs-selector-id,
+:root[color-mode=light] .hljs-title {
+  color: #4078f2;
+}
+:root[color-mode=light] .hljs-built_in,
+:root[color-mode=light] .hljs-title.class_,
+:root[color-mode=light] .hljs-class .hljs-title {
+  color: #c18401;
+}
+:root[color-mode=light] .hljs-emphasis {
+  font-style: italic;
+}
+:root[color-mode=light] .hljs-strong {
+  font-weight: bold;
+}
+:root[color-mode=light] .hljs-link {
+  text-decoration: underline;
+}
+
+:root[color-mode=dark] {
+  /*
+
+  Atom One Dark by Daniel Gamage
+  Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+  base:    #282c34
+  mono-1:  #abb2bf
+  mono-2:  #818896
+  mono-3:  #5c6370
+  hue-1:   #56b6c2
+  hue-2:   #61aeee
+  hue-3:   #c678dd
+  hue-4:   #98c379
+  hue-5:   #e06c75
+  hue-5-2: #be5046
+  hue-6:   #d19a66
+  hue-6-2: #e6c07b
+
+  */
+}
+:root[color-mode=dark] pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+:root[color-mode=dark] code.hljs {
+  padding: 3px 5px;
+}
+:root[color-mode=dark] .hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+:root[color-mode=dark] .hljs-comment,
+:root[color-mode=dark] .hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+:root[color-mode=dark] .hljs-doctag,
+:root[color-mode=dark] .hljs-keyword,
+:root[color-mode=dark] .hljs-formula {
+  color: #c678dd;
+}
+:root[color-mode=dark] .hljs-section,
+:root[color-mode=dark] .hljs-name,
+:root[color-mode=dark] .hljs-selector-tag,
+:root[color-mode=dark] .hljs-deletion,
+:root[color-mode=dark] .hljs-subst {
+  color: #e06c75;
+}
+:root[color-mode=dark] .hljs-literal {
+  color: #56b6c2;
+}
+:root[color-mode=dark] .hljs-string,
+:root[color-mode=dark] .hljs-regexp,
+:root[color-mode=dark] .hljs-addition,
+:root[color-mode=dark] .hljs-attribute,
+:root[color-mode=dark] .hljs-meta .hljs-string {
+  color: #98c379;
+}
+:root[color-mode=dark] .hljs-attr,
+:root[color-mode=dark] .hljs-variable,
+:root[color-mode=dark] .hljs-template-variable,
+:root[color-mode=dark] .hljs-type,
+:root[color-mode=dark] .hljs-selector-class,
+:root[color-mode=dark] .hljs-selector-attr,
+:root[color-mode=dark] .hljs-selector-pseudo,
+:root[color-mode=dark] .hljs-number {
+  color: #d19a66;
+}
+:root[color-mode=dark] .hljs-symbol,
+:root[color-mode=dark] .hljs-bullet,
+:root[color-mode=dark] .hljs-link,
+:root[color-mode=dark] .hljs-meta,
+:root[color-mode=dark] .hljs-selector-id,
+:root[color-mode=dark] .hljs-title {
+  color: #61aeee;
+}
+:root[color-mode=dark] .hljs-built_in,
+:root[color-mode=dark] .hljs-title.class_,
+:root[color-mode=dark] .hljs-class .hljs-title {
+  color: #e6c07b;
+}
+:root[color-mode=dark] .hljs-emphasis {
+  font-style: italic;
+}
+:root[color-mode=dark] .hljs-strong {
+  font-weight: bold;
+}
+:root[color-mode=dark] .hljs-link {
+  text-decoration: underline;
+}
+
 @font-face {
   src: url("/fonts/MinecraftRegular.woff2") format("woff2");
   font-family: "minecraft-font";
@@ -38,7 +224,7 @@ body {
   position: relative;
   overflow-x: hidden;
   min-width: 320px;
-  font-family: minecraft-font, sans-serif;
+  font-family: minecraft-font, -apple-system, blinkmacsystemfont, arial, sans-serif;
   font-size: 1rem;
   line-height: 1.65;
   color: #333;
@@ -158,12 +344,12 @@ body {
 .form__result, .form__input {
   border: 1px solid var(--color-input-border);
   border-radius: 0;
-  padding: 8px 34px 8px 8px;
   box-sizing: border-box;
   background-color: var(--color-input-background);
   color: var(--color-input-text);
 }
 .form__input {
+  padding: 8px 34px 8px 8px;
   display: block;
   width: 100%;
   resize: vertical;
@@ -177,7 +363,22 @@ body {
 .form__result {
   width: 100%;
   resize: vertical;
+  margin: 0;
+  display: flex;
+}
+.form .form__code {
+  height: 200px;
+  background: inherit !important;
+  width: 100%;
+  padding: 8px 34px 8px 8px !important;
+  resize: vertical;
+  overflow-y: auto;
   min-height: 75px;
+  font-family: minecraft-font, -apple-system, blinkmacsystemfont, arial, sans-serif;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  content-visibility: auto;
 }
 .form__label {
   margin-bottom: 5px;

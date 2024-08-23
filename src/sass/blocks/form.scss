@@ -43,13 +43,13 @@
 	&__input {
 		border: 1px solid var(--color-input-border);
 		border-radius: 0;
-		padding: 8px 34px 8px 8px;
 		box-sizing: border-box;
 		background-color: var(--color-input-background);
 		color: var(--color-input-text);
 	}
 
 	&__input {
+		padding: 8px 34px 8px 8px;
 		display: block;
 		width: 100%;
 		resize: vertical;
@@ -65,7 +65,23 @@
 	&__result {
 		width: 100%;
 		resize: vertical;
+		margin: 0;
+		display: flex;
+	}
+
+	& &__code {
+		height: 200px;
+		background: inherit!important;
+		width: 100%;
+		padding: 8px 34px 8px 8px!important;
+		resize: vertical;
+		overflow-y: auto;
 		min-height: 75px;
+		font-family: config.$userfont;
+		text-wrap: balance;
+		overflow-wrap: break-word;
+		box-sizing: border-box;
+		content-visibility: auto;
 	}
 
 	&__label {

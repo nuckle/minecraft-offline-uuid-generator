@@ -5,14 +5,22 @@ $codgray: #171615; // Cod Gray Color
 $fontsize: 16; // Body Font Size
 $textcolor: #333; // Text Color
 $lineheight: 1.65; // Document Line Height
-$userfont: minecraft-font, sans-serif; // User Font Family
 $systemfont: -apple-system, blinkmacsystemfont, arial, sans-serif; // System Font Family
+$userfont: minecraft-font, $systemfont; // User Font Family
 
 // Bootstrap compatible gutter variable => $gutter
 $grid-gutter-width: 30px;
 $gutter: $grid-gutter-width;
 
 // IMPORT SECTION
+@use 'sass:meta';
+
+:root[color-mode='light'] {
+	@include meta.load-css('../../../node_modules/highlight.js/styles/atom-one-light');
+}
+:root[color-mode='dark'] {
+	@include meta.load-css('../../../node_modules/highlight.js/styles/atom-one-dark');
+}
 
 // FONTS LOAD SECTION
 
@@ -38,19 +46,8 @@ $gutter: $grid-gutter-width;
 	@return calc(($pxval / $base) * 1rem);
 }
 
-
-@include font-face(
-	'minecraft-font',
-	'/fonts/MinecraftRegular.woff2',
-	400,
-	normal
-);
-@include font-face(
-	'minecraft-font',
-	'/fonts/MinecraftBold.woff2',
-	700,
-	normal
-);
+@include font-face('minecraft-font', '/fonts/MinecraftRegular.woff2', 400, normal);
+@include font-face('minecraft-font', '/fonts/MinecraftBold.woff2', 700, normal);
 // GENERAL CSS SETTINGS
 
 ::placeholder {

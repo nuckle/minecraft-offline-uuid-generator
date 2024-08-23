@@ -1,124 +1,137 @@
-import createUUID from './js/uuid.js';
-import { copyTextFromInput, downloadFile, handleTextFiles, handleDrop } from './js/utils.js';
-import { toggleColorMode } from './js/theme.js';
+import hljs from 'highlight.js/lib/core';
+import json from 'highlight.js/lib/languages/json';
+import plaintext from 'highlight.js/lib/languages/plaintext';
 import { registerSW } from 'virtual:pwa-register';
+import { toggleColorMode } from './js/theme.js';
+import { copyTextFromInput, downloadFile, handleDrop, handleTextFiles } from './js/utils.js';
+import createUUID from './js/uuid.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-    const button = document.querySelector('.form__button');
-    const input = document.querySelector('.form__input');
-    const result = document.querySelector('.form__result');
-    const option = document.querySelector('.form__option-wrapper');
-    const copyButton = document.querySelector('.form-btn--copy');
-    const copyButtonIcon = document.querySelector('.form-btn__icon--copy use');
-    const downloadButton = document.querySelector('.form-btn__icon--download');
-    const uploadButton = document.querySelector('.form__uploader');
-    const clearButton = document.querySelector('.form-btn--clear');
+	const button = document.querySelector('.form__button');
+	const input = document.querySelector('.form__input');
+	const result = document.querySelector('.form__result code');
+	const option = document.querySelector('.form__option-wrapper');
+	const copyButton = document.querySelector('.form-btn--copy');
+	const copyButtonIcon = document.querySelector('.form-btn__icon--copy use');
+	const downloadButton = document.querySelector('.form-btn__icon--download');
+	const uploadButton = document.querySelector('.form__uploader');
+	const clearButton = document.querySelector('.form-btn--clear');
 
-    function getOptionValue() {
-        return document.querySelector('input[name="export"]:checked').value;
-    }
+	function getOptionValue() {
+		return document.querySelector('input[name="export"]:checked').value;
+	}
 
-    async function generatePairs(format) {
-        const usernames = input.value.split('\n').filter((i) => i);
-        let generatedPairs = [];
+	hljs.registerLanguage('json', json);
+	hljs.registerLanguage('plaintext', plaintext);
 
-        const promises = usernames.map(async (username) => {
-            const uuid = await createUUID(username);
-            if (format === 'json') {
-                generatedPairs.push({
-                    uuid: uuid,
-                    name: username,
-                });
-            } else if (format === 'txt') {
-                generatedPairs.push(`${username} - ${uuid}`);
-            }
-        });
+	async function generatePairs(format) {
+		const usernames = input.value.split('\n').filter((i) => i);
+		let generatedPairs = [];
 
-        await Promise.all(promises);
+		const promises = usernames.map(async (username) => {
+			const uuid = await createUUID(username);
+			if (format === 'json') {
+				generatedPairs.push({
+					uuid: uuid,
+					name: username,
+				});
+			} else if (format === 'txt') {
+				generatedPairs.push(`${username} - ${uuid}`);
+			}
+		});
 
-        format = generatedPairs.length && format === 'json' ? 'json' : 'text';
+		await Promise.all(promises);
 
-        result.value = format === 'json' ? JSON.stringify(generatedPairs, null, 2) : generatedPairs.join('\n');
-    }
+		format = generatedPairs.length && format === 'json' ? 'json' : 'text';
 
-    button.addEventListener('click', async () => {
-        await generatePairs(getOptionValue());
-    });
+		result.innerHTML = format === 'json' ? JSON.stringify(generatedPairs, null, 2) : generatedPairs.join('\n');
 
-    option.addEventListener('click', () => {
-        button.click();
-    });
+		result.dataset.highlighted = '';
 
-    copyButton.addEventListener('click', () => {
-        copyTextFromInput(result, copyButtonIcon);
-    });
+		result.classList.toggle('language-json', format === 'json');
+		result.classList.toggle('language-plaintext', format !== 'json');
 
-    downloadButton.addEventListener('click', () => {
-        if (result.value !== '') {
-            const now = new Date();
-            const fileName =
-                'uuid' +
-                '-' +
-                now.getFullYear() +
-                '-' +
-                ('0' + now.getDate()).slice(-2) +
-                '-' +
-                ('0' + (now.getMonth() + 1)).slice(-2) +
-                '-' +
-                ('0' + now.getHours()).slice(-2) +
-                '-' +
-                ('0' + now.getMinutes()).slice(-2) +
-                '-' +
-                ('0' + now.getSeconds()).slice(-2) +
-                '.';
-            downloadFile(fileName + getOptionValue(), result.value);
-        }
-    });
+		hljs.highlightElement(result);
+	}
 
-    async function updateInputFromFile(file) {
-        let text = await file.text();
-        input.value += input.textContent || text;
-    }
+	button.addEventListener('click', async () => {
+		await generatePairs(getOptionValue());
+	});
 
-    uploadButton.addEventListener('change', async (e) => {
-        let files = e.target.files;
-        await handleTextFiles(files, updateInputFromFile);
-        await generatePairs(getOptionValue());
-    });
+	option.addEventListener('click', () => {
+		button.click();
+	});
 
-    ['dragenter', 'dragover'].forEach((e) => {
-        input.addEventListener(e, highlight, false);
-    });
-    ['dragleave', 'drop'].forEach((e) => {
-        input.addEventListener(e, unhighlight, false);
-    });
+	copyButton.addEventListener('click', () => {
+		copyTextFromInput(result, copyButtonIcon);
+	});
 
-    input.addEventListener(
-        'drop',
-        (e) => {
-            handleDrop(e, async (files) => {
-                await handleTextFiles(files, updateInputFromFile);
-                await generatePairs(getOptionValue());
-            });
-        },
-        false,
-    );
+	downloadButton.addEventListener('click', () => {
+		const resultValue = result.innerText;
+		if (resultValue !== '') {
+			const now = new Date();
+			const fileName =
+				'uuid' +
+				'-' +
+				now.getFullYear() +
+				'-' +
+				('0' + now.getDate()).slice(-2) +
+				'-' +
+				('0' + (now.getMonth() + 1)).slice(-2) +
+				'-' +
+				('0' + now.getHours()).slice(-2) +
+				'-' +
+				('0' + now.getMinutes()).slice(-2) +
+				'-' +
+				('0' + now.getSeconds()).slice(-2) +
+				'.';
+			downloadFile(fileName + getOptionValue(), resultValue);
+		}
+	});
 
-    function hideClearBtn() {
-        clearButton.classList.add('form-btn--hidden');
-    }
+	async function updateInputFromFile(file) {
+		let text = await file.text();
+		input.value += input.textContent || text;
+	}
 
-    function showClearBtn() {
-        clearButton.classList.remove('form-btn--hidden');
-    }
+	uploadButton.addEventListener('change', async (e) => {
+		let files = e.target.files;
+		await handleTextFiles(files, updateInputFromFile);
+		await generatePairs(getOptionValue());
+	});
 
-    clearButton.addEventListener('click', function () {
-        input.value = '';
-        hideClearBtn();
-    });
+	['dragenter', 'dragover'].forEach((e) => {
+		input.addEventListener(e, highlight, false);
+	});
+	['dragleave', 'drop'].forEach((e) => {
+		input.addEventListener(e, unhighlight, false);
+	});
 
+	input.addEventListener(
+		'drop',
+		(e) => {
+			handleDrop(e, async (files) => {
+				await handleTextFiles(files, updateInputFromFile);
+				await generatePairs(getOptionValue());
+			});
+		},
+		false,
+	);
 
-	input.addEventListener('input', async function() {
+	function hideClearBtn() {
+		clearButton.classList.add('form-btn--hidden');
+	}
+
+	function showClearBtn() {
+		clearButton.classList.remove('form-btn--hidden');
+	}
+
+	clearButton.addEventListener('click', function () {
+		input.value = '';
+		hideClearBtn();
+	});
+
+	input.addEventListener('input', async function () {
 		if (input.value === '') {
 			hideClearBtn();
 		} else if (input.value !== '') {
@@ -126,33 +139,32 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
+	function highlight(e) {
+		input.classList.add('form__input--highlight');
+	}
 
-    function highlight(e) {
-        input.classList.add('form__input--highlight');
-    }
+	function unhighlight(e) {
+		input.classList.remove('form__input--highlight');
+	}
 
-    function unhighlight(e) {
-        input.classList.remove('form__input--highlight');
-    }
+	// Get the buttons in the DOM
+	const toggleColorButtons = document.querySelectorAll('.color-mode-btn');
 
-    // Get the buttons in the DOM
-    const toggleColorButtons = document.querySelectorAll('.color-mode-btn');
+	// Set up event listeners
+	toggleColorButtons.forEach((btn) => {
+		btn.addEventListener('click', toggleColorMode);
+	});
 
-    // Set up event listeners
-    toggleColorButtons.forEach((btn) => {
-        btn.addEventListener('click', toggleColorMode);
-    });
+	if (
+		/* This condition checks whether the user has set a site preference for dark mode OR a OS-level preference for Dark Mode AND no site preference */
+		localStorage.getItem('color-mode') === 'dark' ||
+		(window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('color-mode'))
+	) {
+		// if true, set the site to Dark Mode
+		document.documentElement.setAttribute('color-mode', 'dark');
+	}
 
-    if (
-        /* This condition checks whether the user has set a site preference for dark mode OR a OS-level preference for Dark Mode AND no site preference */
-        localStorage.getItem('color-mode') === 'dark' ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('color-mode'))
-    ) {
-        // if true, set the site to Dark Mode
-        document.documentElement.setAttribute('color-mode', 'dark');
-    }
-
-    registerSW({
-        immediate: true,
-    });
+	registerSW({
+		immediate: true,
+	});
 });
