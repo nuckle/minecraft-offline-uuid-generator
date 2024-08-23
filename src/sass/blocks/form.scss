@@ -71,9 +71,9 @@
 
 	& &__code {
 		height: 200px;
-		background: inherit!important;
+		background: inherit !important;
 		width: 100%;
-		padding: 8px 34px 8px 8px!important;
+		padding: 8px 34px 8px 8px !important;
 		resize: vertical;
 		overflow-y: auto;
 		min-height: 75px;
@@ -82,6 +82,10 @@
 		overflow-wrap: break-word;
 		box-sizing: border-box;
 		content-visibility: auto;
+
+		&:empty:not(:focus)::before {
+			content: attr(data-message);
+		}
 	}
 
 	&__label {
@@ -204,4 +208,3 @@
 		top: 44px;
 	}
 }
-

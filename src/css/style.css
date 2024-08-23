@@ -198,7 +198,8 @@
   font-style: normal;
   font-display: swap;
 }
-::placeholder {
+::placeholder,
+:empty:not(:focus):before {
   color: #666;
 }
 
@@ -379,6 +380,9 @@ body {
   overflow-wrap: break-word;
   box-sizing: border-box;
   content-visibility: auto;
+}
+.form .form__code:empty:not(:focus)::before {
+  content: attr(data-message);
 }
 .form__label {
   margin-bottom: 5px;

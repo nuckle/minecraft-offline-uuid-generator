@@ -50,7 +50,8 @@ $gutter: $grid-gutter-width;
 @include font-face('minecraft-font', '/fonts/MinecraftBold.woff2', 700, normal);
 // GENERAL CSS SETTINGS
 
-::placeholder {
+::placeholder,
+:empty:not(:focus):before {
 	color: #666;
 }
 
