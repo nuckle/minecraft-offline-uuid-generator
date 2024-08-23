@@ -1,10 +1,9 @@
-import hljs from 'highlight.js/lib/core';
-import json from 'highlight.js/lib/languages/json';
-import plaintext from 'highlight.js/lib/languages/plaintext';
 import { registerSW } from 'virtual:pwa-register';
 import { toggleColorMode } from './js/theme.js';
 import { copyTextFromInput, downloadFile, handleDrop, handleTextFiles } from './js/utils.js';
 import createUUID from './js/uuid.js';
+
+const highlightWorker = new Worker(new URL('./js/highlightWorker.js', import.meta.url), { type: 'module' });
 
 document.addEventListener('DOMContentLoaded', function () {
 	const button = document.querySelector('.form__button');
@@ -20,9 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	function getOptionValue() {
 		return document.querySelector('input[name="export"]:checked').value;
 	}
-
-	hljs.registerLanguage('json', json);
-	hljs.registerLanguage('plaintext', plaintext);
 
 	async function generatePairs(format) {
 		const usernames = input.value.split('\n').filter((i) => i);
@@ -44,14 +40,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		format = generatedPairs.length && format === 'json' ? 'json' : 'text';
 
-		result.innerHTML = format === 'json' ? JSON.stringify(generatedPairs, null, 2) : generatedPairs.join('\n');
+        const codeToHighlight = format === 'json' ? JSON.stringify(generatedPairs, null, 2) : generatedPairs.join('\n');
 
-		result.dataset.highlighted = '';
+		// Use the Web Worker to highlight the code
+		highlightWorker.postMessage({ code: codeToHighlight, language: format === 'json' ? 'json' : 'plaintext' });
 
-		result.classList.toggle('language-json', format === 'json');
-		result.classList.toggle('language-plaintext', format !== 'json');
+		highlightWorker.onmessage = (event) => {
+			result.innerHTML = event.data;
 
-		hljs.highlightElement(result);
+			result.classList.add('hljs');
+			result.classList.toggle('language-json', format === 'json');
+			result.classList.toggle('language-plaintext', format !== 'json');
+		};
 	}
 
 	button.addEventListener('click', async () => {
