@@ -1,5 +1,14 @@
 @use '../base/config';
 
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .form {
 	&__option {
 		display: inline-flex;
@@ -96,6 +105,13 @@
 
 	&__result-wrapper {
 		position: relative;
+		overflow: hidden;
+
+		&--loading {
+			user-select: none;
+			filter: brightness(60%);
+			pointer-events: none;
+		}
 	}
 
 	&__button {

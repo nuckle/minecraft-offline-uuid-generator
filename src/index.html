@@ -7,6 +7,19 @@
 	<form class="form" action="/">
 		<div class="container">
 			<label class="form__label" for="input">Nicknames</label>
+
+			<div class="form__option-wrapper form__option-wrapper--nicknames">
+				<div class="form__option">
+					<input type="radio" class="form__radio" id="offline" name="import" value="offline" required="" checked="">
+					<label for="offline">Offline</label>
+				</div>
+
+				<div class="form__option">
+					<input type="radio" class="form__radio" id="online" name="import" value="online" required="">
+					<label for="online">Online</label>
+				</div>
+			</div>
+
 			<div class="form-wrapper">
 				<textarea class="form__input" id="input" name="input" placeholder="Notch 
 jeb_" spellcheck="false" rows="4"></textarea>
@@ -34,7 +47,7 @@ jeb_" spellcheck="false" rows="4"></textarea>
 				<label class="form__label">Result</label>
 			</div>
 
-			<div class="form__option-wrapper">
+			<div class="form__option-wrapper form__option-wrapper--result">
 				<div class="form__option">
 					<input type="radio" class="form__radio" id="text" name="export" value="txt" required="" checked="">
 					<label for="text">Plain Text</label>
@@ -47,6 +60,9 @@ jeb_" spellcheck="false" rows="4"></textarea>
 			</div>
 
 			<div id="result" class="form__result-wrapper">
+
+				<div class="loading"></div>
+
 				<pre class="form__result" spellcheck="false">
 					<code data-message="Generated UUIDs will appear here" class="form__code language-plaintext"></code>
 				</pre>
