@@ -8,9 +8,7 @@
 	"scripts": {
 		"dev": "npm-run-all --parallel dev:*",
 		"dev:vite": "vite --port 3000 --host",
-		"dev:sass": "sass  --no-source-map --watch src/sass/style.scss:src/css/style.css",
 		"build": "vite build --base=${npm_config_repository:-/} && npm run prettify",
-		"build-sass": "sass  --no-source-map src/sass/style.scss:dist/css/style.css",
 		"prettify": "glob-run js-beautify --editorconfig -r 'dist/**/*.html'",
 		"preview": "vite preview --port 3001 --host"
 	},

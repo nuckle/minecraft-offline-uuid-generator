@@ -1,3 +1,5 @@
+import './sass/style.scss'
+
 import { registerSW } from 'virtual:pwa-register';
 import { toggleColorMode } from './js/theme.js';
 import { copyTextFromInput, downloadFile, handleDrop, handleTextFiles } from './js/utils.js';
@@ -5,7 +7,8 @@ import createUUID from './js/uuid.js';
 
 const highlightWorker = new Worker(new URL('./js/highlightWorker.js', import.meta.url), { type: 'module' });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+
 	const button = document.querySelector('.form__button');
 	const input = document.querySelector('.form__input');
 	const result = document.querySelector('.form__result code');
