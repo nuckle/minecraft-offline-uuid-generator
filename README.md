@@ -18,6 +18,8 @@ You can view the page using one of the following URLs:
 - output as json or plain text 
 - an ability to download output 
 - can be locally installed as PWA
+- syntax highlighting
+- mojang api support (via `api.ashcon.app`)
 
 ## Requirements
 
