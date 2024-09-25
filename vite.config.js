@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { resolve, relative, extname } from 'path';
+import { resolve, relative, extname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { VitePWA } from 'vite-plugin-pwa';
 import glob from 'fast-glob';
@@ -20,6 +20,19 @@ export default defineConfig({
 				}),
 			],
 		},
+	},
+	resolve: {
+		alias: [
+			{
+				find: /~(.+)/,
+				replacement: join(process.cwd(), 'node_modules/$1'),
+			},
+
+			{
+				find: /@\//,
+				replacement: join(process.cwd(), './src/renderer') + '/',
+			},
+		],
 	},
 	plugins: [
 		viteSvgSpriteWrapper({

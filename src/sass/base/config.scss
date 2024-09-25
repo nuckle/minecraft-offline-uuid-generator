@@ -16,10 +16,10 @@ $gutter: $grid-gutter-width;
 @use 'sass:meta';
 
 :root[color-mode='light'] {
-	@include meta.load-css('../../../node_modules/highlight.js/styles/atom-one-light');
+	@include meta.load-css('~highlight.js/styles/atom-one-light');
 }
 :root[color-mode='dark'] {
-	@include meta.load-css('../../../node_modules/highlight.js/styles/atom-one-dark');
+	@include meta.load-css('~highlight.js/styles/atom-one-dark');
 }
 
 // FONTS LOAD SECTION
