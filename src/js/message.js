@@ -18,7 +18,7 @@ export const createMessageElement = () => {
 export const removeMessageElement = (messageEl) => {
 	setTimeout(() => {
 		messageEl.classList.remove('message-box--animate');
-		messageEl.addEventListener('transitioned', () => {
+		messageEl.addEventListener('transitionend', () => {
 			messageEl.remove();
 		});
 	}, 2000);

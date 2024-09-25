@@ -53,7 +53,8 @@
 
 .message-box {
 	position: fixed;
-	top: calc(90vh - 16px);
+	/* top: calc(90vh - 16px); */
+	top: 100vh;
 	left: 0;
 	right: 0;
 	margin-inline: auto;
@@ -61,14 +62,14 @@
 	width: fit-content;
 	max-width: 90%;
 	padding: 3px 8px;
-	background-color: #A71734;
+	background-color: #a71734;
 	z-index: 2;
 	box-sizing: border-box;
-	transform: translateY(100vh);
-	transition: .5s transform;
+	transform: translateY(0);
+	transition: 0.5s transform;
 
 	&--animate {
-		transform: translateY(0);
+		transform: translateY(calc(-12vh + 16px));
 	}
 
 	&__text {
