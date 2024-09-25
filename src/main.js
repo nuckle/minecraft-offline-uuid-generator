@@ -7,6 +7,7 @@ import { toggleColorMode } from './js/theme.js';
 import { copyTextFromInput, downloadFile, handleDrop, handleTextFiles } from './js/utils.js';
 import { getUUID } from './js/api.js';
 import createUUID from './js/uuid.js';
+import { createMessageElement, removeMessageElement } from './js/message.js';
 
 const highlightWorker = new Worker(new URL('./js/highlightWorker.js', import.meta.url), { type: 'module' });
 
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 						const formattedPair = formatPair(username, uuid, format);
 						generatedPairs.push(formattedPair);
 					} catch (error) {
-						console.error(error);
+						throw error;
 					}
 				}),
 			);
@@ -82,7 +83,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 			});
 		}
 
-		await Promise.all(promises);
+		const results = await Promise.allSettled(promises);
+		const rejected = results.filter((result) => result.status === 'rejected').map((result) => result.reason);
+
+		if (rejected.length > 0) {
+			const messageBox = createMessageElement();
+			removeMessageElement(messageBox);
+		}
 		hideLoader();
 
 		format = generatedPairs.length && format === 'json' ? 'json' : 'text';
@@ -213,6 +220,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 	) {
 		// if true, set the site to Dark Mode
 		document.documentElement.setAttribute('color-mode', 'dark');
+	} else {
+		document.documentElement.setAttribute('color-mode', 'light');
 	}
 
 	registerSW({

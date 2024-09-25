@@ -51,6 +51,33 @@
 	}
 }
 
+.message-box {
+	position: fixed;
+	top: calc(90vh - 16px);
+	left: 0;
+	right: 0;
+	margin-inline: auto;
+	display: block;
+	width: fit-content;
+	max-width: 90%;
+	padding: 3px 8px;
+	background-color: #A71734;
+	z-index: 2;
+	box-sizing: border-box;
+	transform: translateY(100vh);
+	transition: .5s transform;
+
+	&--animate {
+		transform: translateY(0);
+	}
+
+	&__text {
+		text-align: center;
+		color: #fff;
+		margin: 0;
+	}
+}
+
 /* Any element with the class "light--hidden" will be hidden when the site is set to Light Mode */
 :root[color-mode='light'] .light--hidden {
 	display: none;
