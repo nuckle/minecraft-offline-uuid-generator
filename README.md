@@ -3,7 +3,10 @@
 
 ## Preview
 
-![image_2024-01-22-11-47-03](img/preview.gif)
+<details>
+  <summary>Click to see image preview</summary>
+  <img src="img/preview.gif" alt="preview">
+</details>
 
 You can view the page using one of the following URLs:
 
