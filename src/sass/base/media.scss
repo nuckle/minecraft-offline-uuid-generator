@@ -13,12 +13,17 @@
 
 @media (max-width: 576px) {
 	.header {
-
 		&__title {
 			font-size: 1em;
+			line-height: 1.2em;
 		}
 	}
 
+	.container {
+		&--header {
+			column-gap: 15px;
+		}
+	}
 }
 
 @media (min-width: 576px) {
@@ -29,7 +34,7 @@
 			align-items: center;
 		}
 	}
-	
+
 	.header {
 		padding: 10px 0;
 
@@ -37,7 +42,6 @@
 			font-size: 1.2em;
 		}
 	}
-
 }
 
 @media (min-width: 768px) {
@@ -46,14 +50,12 @@
 	}
 
 	.header {
-
 		&__title {
 			font-size: 1.4em;
 		}
 	}
 
 	.form {
-
 		&__button {
 			padding: 10px 20px;
 			font-size: 1em;
@@ -80,7 +82,6 @@
 }
 
 @media (min-width: 2560px) {
-
 	.container {
 		max-width: 1920px;
 	}
