@@ -1,4 +1,37 @@
 image: node:18.16.0
+
+stages:
+  - mirror-from-external
+  - deploy
+
+mirror-from-external:
+  stage: mirror-from-external
+  image: ubuntu:18.04
+  before_script:
+    - apt-get update -y && apt-get install openssh-client -y
+    - apt install git -y
+    - eval $(ssh-agent -s)
+    - echo "$GIT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $GITLAB_HOST >> ~/.ssh/known_hosts  2>/dev/null
+    - ssh-keyscan $GITHUB_HOST >> ~/.ssh/known_hosts 2>/dev/null
+    - chmod 644 ~/.ssh/known_hosts
+    - git config --global user.name "${GIT_USER_NAME}"
+    - git config --global user.email "${GIT_USER_EMAIL}"
+    - ssh -T git@$GITLAB_HOST 2>&1 | grep "successful" || true # Test SSH connection
+  script:
+    - if [ -z "$DESTINATION_REPOSITORY" ]; then echo "DESTINATION_REPOSITORY is not set"; exit 1; fi
+    - echo $SOURCE_REPOSITORY
+    - git clone --mirror $SOURCE_REPOSITORY $DESTINATION_DIR
+    - cd $DESTINATION_DIR
+    - git remote remove origin
+    - git remote add origin "$DESTINATION_REPOSITORY"
+    - git push --prune --all
+    - git push --prune --tags
+  only:
+    - branches
+
 pages:
   stage: deploy
   cache:
